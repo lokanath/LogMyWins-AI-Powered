@@ -5,9 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system — Molten Glass Journal direction.
- * Warm paper background, deep teal accent, Fraunces serif headings,
- * Inter sans body. Frosted glass surfaces with backdrop blur.
+ * Design system — Frosted Executive direction.
+ * Cool slate background, steel-blue accent, Inter throughout.
+ * Crisp frosted-glass surfaces with backdrop blur.
  */
 
 @theme inline {
