@@ -236,9 +236,8 @@ function Journal({ session }: { session: Session }) {
             <button
               type="submit"
               disabled={createMutation.isPending}
-              className="inline-flex items-center gap-2 rounded-lg bg-teal px-4 py-2.5 text-sm font-semibold text-white ring-1 ring-teal transition-transform hover:-translate-y-px active:translate-y-0 disabled:opacity-50"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-teal px-6 py-3 text-base font-semibold text-white ring-1 ring-teal transition-transform hover:-translate-y-px active:translate-y-0 disabled:opacity-50"
             >
-              <span className="grid size-4 place-items-center text-white/90">+</span>
               {createMutation.isPending ? "Submitting..." : "Submit"}
             </button>
           </form>
