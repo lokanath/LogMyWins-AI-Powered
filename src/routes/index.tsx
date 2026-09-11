@@ -248,7 +248,7 @@ function Journal({ session }: { session: Session }) {
             </button>
           </div>
           <h1 className="text-balance font-serif text-4xl font-medium leading-none text-ink sm:text-5xl">
-            Wins Journal
+            LogMyWins
           </h1>
           <p className="mt-4 max-w-[42ch] text-pretty text-ink/55">
             A private record of what you moved, with the impact each win created. Nothing else.
