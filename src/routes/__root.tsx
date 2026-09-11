@@ -78,17 +78,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Wins Journal" },
+      { title: "LogMyWins — AI-Powered Achievement Journal" },
       {
         name: "description",
         content:
-          "A private journal for logging professional achievements and their business impact.",
+          "A private, AI-powered wins journal for business professionals. Log achievements and their impact, then generate polished, executive-grade summaries with AI.",
       },
-      { property: "og:title", content: "Wins Journal" },
+      { property: "og:title", content: "LogMyWins — AI-Powered Achievement Journal" },
       {
         property: "og:description",
         content:
-          "A private journal for logging professional achievements and their business impact.",
+          "A private, AI-powered wins journal for business professionals. Log achievements and their impact, then generate polished, executive-grade summaries with AI.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
