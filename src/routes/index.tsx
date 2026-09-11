@@ -239,7 +239,7 @@ function Journal({ session }: { session: Session }) {
               className="inline-flex items-center gap-2 rounded-lg bg-teal px-4 py-2.5 text-sm font-semibold text-white ring-1 ring-teal transition-transform hover:-translate-y-px active:translate-y-0 disabled:opacity-50"
             >
               <span className="grid size-4 place-items-center text-white/90">+</span>
-              {createMutation.isPending ? "Recording..." : "Record win"}
+              {createMutation.isPending ? "Submitting..." : "Submit"}
             </button>
           </form>
         </section>
