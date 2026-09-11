@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
         content:
           "Log and track your professional achievements and their business impact.",
       },
-      { property: "og:title", content: "Wins Journal — Meridian" },
+      { property: "og:title", content: "Wins Journal" },
       {
         property: "og:description",
         content:
