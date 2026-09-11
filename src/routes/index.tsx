@@ -120,6 +120,58 @@ function Journal({ session }: { session: Session }) {
     },
   });
 
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editDate, setEditDate] = useState("");
+  const [editDescription, setEditDescription] = useState("");
+  const [editImpact, setEditImpact] = useState("");
+
+  const updateMutation = useMutation({
+    mutationFn: async (input: {
+      id: string;
+      win_date: string;
+      description: string;
+      business_impact: string;
+    }) => {
+      const { id, ...fields } = input;
+      const { error } = await supabase.from("wins").update(fields).eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["wins"] });
+      setEditingId(null);
+      toast.success("Entry updated");
+    },
+    onError: () => {
+      toast.error("Could not update entry. Please try again.");
+    },
+  });
+
+  const startEdit = (win: Win) => {
+    setEditingId(win.id);
+    setEditDate(win.win_date);
+    setEditDescription(win.description);
+    setEditImpact(win.business_impact);
+  };
+
+  const handleUpdate = (e: FormEvent) => {
+    e.preventDefault();
+    if (!editingId) return;
+    if (!editDescription.trim() || !editImpact.trim()) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+    if (isAfter(parseISO(editDate), new Date())) {
+      toast.warning("Future date selections are not allowed.");
+      return;
+    }
+    updateMutation.mutate({
+      id: editingId,
+      win_date: editDate,
+      description: editDescription.trim(),
+      business_impact: editImpact.trim(),
+    });
+  };
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!description.trim() || !businessImpact.trim()) {
