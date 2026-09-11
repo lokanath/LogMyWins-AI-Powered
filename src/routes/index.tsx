@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState, type FormEvent } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Session } from "@supabase/supabase-js";
@@ -7,6 +8,7 @@ import { toast } from "sonner";
 
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/use-auth";
+import { generateSummary } from "@/lib/summary.functions";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -187,6 +189,37 @@ function Journal({ session }: { session: Session }) {
       description: description.trim(),
       business_impact: businessImpact.trim(),
     });
+  };
+
+  const [timeframe, setTimeframe] = useState<"month" | "quarter" | "year">(
+    "month",
+  );
+  const [summary, setSummary] = useState<string[] | null>(null);
+  const callSummary = useServerFn(generateSummary);
+
+  const summaryMutation = useMutation({
+    mutationFn: async () => callSummary({ data: { timeframe } }),
+    onSuccess: (result) => {
+      if (!result.bullets.length) {
+        setSummary(null);
+        toast.warning("No entries found in that time frame.");
+        return;
+      }
+      setSummary(result.bullets);
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || "Could not generate the summary.");
+    },
+  });
+
+  const handleCopy = async () => {
+    if (!summary) return;
+    try {
+      await navigator.clipboard.writeText(summary.map((b) => `• ${b}`).join("\n"));
+      toast.success("Summary copied");
+    } catch {
+      toast.error("Could not copy. Please select and copy manually.");
+    }
   };
 
   const handleSignOut = async () => {
@@ -426,6 +459,68 @@ function Journal({ session }: { session: Session }) {
               ))}
             </ol>
           )}
+        </section>
+
+        {/* AI summary */}
+        <section className="fade-rise mt-12" style={{ animationDelay: "0.2s" }}>
+          <div className="rounded-2xl bg-white/55 p-6 ring-1 ring-white/50 backdrop-blur-xl sm:p-8">
+            <div className="mb-5 flex items-center gap-2">
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-teal">
+                Achievement summary
+              </span>
+              <span className="h-px flex-1 bg-line" />
+            </div>
+            <div className="flex flex-wrap items-end gap-3">
+              <div>
+                <label
+                  htmlFor="summary-range"
+                  className="mb-1.5 block text-xs font-medium text-ink/50"
+                >
+                  Time frame
+                </label>
+                <select
+                  id="summary-range"
+                  value={timeframe}
+                  onChange={(e) =>
+                    setTimeframe(e.target.value as "month" | "quarter" | "year")
+                  }
+                  className="rounded-lg bg-white/70 px-3.5 py-2 text-sm text-ink ring-1 ring-line focus:outline-none focus:ring-2 focus:ring-teal/40"
+                >
+                  <option value="month">Last month</option>
+                  <option value="quarter">Last quarter</option>
+                  <option value="year">Full year</option>
+                </select>
+              </div>
+              <button
+                type="button"
+                onClick={() => summaryMutation.mutate()}
+                disabled={summaryMutation.isPending}
+                className="rounded-lg bg-teal px-4 py-2 text-sm font-semibold text-white ring-1 ring-teal transition-transform hover:-translate-y-px active:translate-y-0 disabled:opacity-50"
+              >
+                {summaryMutation.isPending ? "Generating..." : "Generate Summary"}
+              </button>
+            </div>
+
+            {summary && (
+              <div className="mt-6 border-t border-line pt-5">
+                <ul className="space-y-3">
+                  {summary.map((bullet, i) => (
+                    <li key={i} className="flex gap-3 text-[15px] text-ink">
+                      <span className="mt-2 size-1.5 shrink-0 rounded-full bg-teal" />
+                      <span className="text-pretty">{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className="mt-5 rounded-lg px-4 py-2 text-sm font-medium text-ink/55 ring-1 ring-line transition-colors hover:text-ink"
+                >
+                  Copy to clipboard
+                </button>
+              </div>
+            )}
+          </div>
         </section>
 
       </div>
