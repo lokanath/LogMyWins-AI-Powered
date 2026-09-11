@@ -7,6 +7,7 @@ import { toast } from "sonner";
 
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/use-auth";
+import { generateSummary } from "@/lib/summary.functions";
 
 export const Route = createFileRoute("/")({
   head: () => ({
