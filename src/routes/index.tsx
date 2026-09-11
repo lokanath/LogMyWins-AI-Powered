@@ -154,15 +154,7 @@ function Journal({ session }: { session: Session }) {
       <div className="relative mx-auto max-w-2xl px-6 py-14 sm:py-20">
         {/* header */}
         <header className="fade-rise mb-10" style={{ animationDelay: "0.02s" }}>
-          <div className="mb-8 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="grid size-9 place-items-center rounded-full bg-white/60 ring-1 ring-white/40 backdrop-blur-xl">
-                <span className="size-2.5 rounded-full bg-teal" />
-              </span>
-              <span className="text-sm font-medium uppercase tracking-[0.18em] text-ink/50">
-                Meridian
-              </span>
-            </div>
+          <div className="mb-8 flex justify-end">
             <button
               onClick={handleSignOut}
               className="text-xs font-medium text-ink/40 transition-colors hover:text-ink/70"
@@ -307,10 +299,6 @@ function Journal({ session }: { session: Session }) {
           )}
         </section>
 
-        <footer className="mt-14 flex items-center justify-between border-t border-line/70 pt-6 text-xs text-ink/40">
-          <span>Private to you. Nothing is shared.</span>
-          <span>Meridian · est. 2024</span>
-        </footer>
       </div>
     </div>
   );
