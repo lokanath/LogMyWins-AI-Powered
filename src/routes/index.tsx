@@ -495,8 +495,11 @@ function Journal({ session }: { session: Session }) {
                 type="button"
                 onClick={() => summaryMutation.mutate()}
                 disabled={summaryMutation.isPending}
-                className="rounded-lg bg-teal px-4 py-2 text-sm font-semibold text-white ring-1 ring-teal transition-transform hover:-translate-y-px active:translate-y-0 disabled:opacity-50"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-teal px-4 py-2 text-sm font-semibold text-white ring-1 ring-teal transition-transform hover:-translate-y-px active:translate-y-0 disabled:opacity-50"
               >
+                {summaryMutation.isPending && (
+                  <span className="size-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+                )}
                 {summaryMutation.isPending ? "Generating..." : "Generate Summary"}
               </button>
             </div>
