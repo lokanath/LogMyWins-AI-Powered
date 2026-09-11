@@ -5,9 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system — Molten Glass Journal direction.
- * Warm paper background, deep teal accent, Fraunces serif headings,
- * Inter sans body. Frosted glass surfaces with backdrop blur.
+ * Design system — Frosted Executive direction.
+ * Cool slate background, steel-blue accent, Inter throughout.
+ * Crisp frosted-glass surfaces with backdrop blur.
  */
 
 @theme inline {
@@ -56,47 +56,47 @@
   --color-teal: var(--teal);
   --color-line: var(--line);
   --font-sans: "Inter", sans-serif;
-  --font-serif: "Fraunces", serif;
+  --font-serif: "Inter", sans-serif;
 }
 
 :root {
   --radius: 0.75rem;
-  --background: oklch(0.971 0.004 150);
-  --foreground: oklch(0.196 0.012 155);
+  --background: oklch(0.962 0.008 235);
+  --foreground: oklch(0.24 0.02 255);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.196 0.012 155);
+  --card-foreground: oklch(0.24 0.02 255);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.196 0.012 155);
-  --primary: oklch(0.395 0.063 177);
-  --primary-foreground: oklch(0.98 0.003 150);
-  --secondary: oklch(0.95 0.005 145);
-  --secondary-foreground: oklch(0.196 0.012 155);
-  --muted: oklch(0.95 0.005 145);
-  --muted-foreground: oklch(0.5 0.01 155);
-  --accent: oklch(0.395 0.063 177 / 8%);
-  --accent-foreground: oklch(0.395 0.063 177);
+  --popover-foreground: oklch(0.24 0.02 255);
+  --primary: oklch(0.42 0.09 255);
+  --primary-foreground: oklch(0.98 0.004 235);
+  --secondary: oklch(0.945 0.008 235);
+  --secondary-foreground: oklch(0.24 0.02 255);
+  --muted: oklch(0.945 0.008 235);
+  --muted-foreground: oklch(0.5 0.015 255);
+  --accent: oklch(0.42 0.09 255 / 8%);
+  --accent-foreground: oklch(0.42 0.09 255);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.98 0.003 150);
-  --border: oklch(0.927 0.005 140);
-  --input: oklch(0.927 0.005 140);
-  --ring: oklch(0.395 0.063 177 / 40%);
+  --destructive-foreground: oklch(0.98 0.004 235);
+  --border: oklch(0.915 0.008 240);
+  --input: oklch(0.915 0.008 240);
+  --ring: oklch(0.42 0.09 255 / 40%);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.196 0.012 155);
-  --sidebar-primary: oklch(0.395 0.063 177);
-  --sidebar-primary-foreground: oklch(0.98 0.003 150);
-  --sidebar-accent: oklch(0.95 0.005 145);
-  --sidebar-accent-foreground: oklch(0.196 0.012 155);
-  --sidebar-border: oklch(0.927 0.005 140);
-  --sidebar-ring: oklch(0.395 0.063 177 / 40%);
-  --paper: oklch(0.971 0.004 150);
-  --ink: oklch(0.196 0.012 155);
-  --teal: oklch(0.395 0.063 177);
-  --line: oklch(0.927 0.005 140);
+  --sidebar: oklch(0.975 0.005 235);
+  --sidebar-foreground: oklch(0.24 0.02 255);
+  --sidebar-primary: oklch(0.42 0.09 255);
+  --sidebar-primary-foreground: oklch(0.98 0.004 235);
+  --sidebar-accent: oklch(0.945 0.008 235);
+  --sidebar-accent-foreground: oklch(0.24 0.02 255);
+  --sidebar-border: oklch(0.915 0.008 240);
+  --sidebar-ring: oklch(0.42 0.09 255 / 40%);
+  --paper: oklch(0.962 0.008 235);
+  --ink: oklch(0.24 0.02 255);
+  --teal: oklch(0.42 0.09 255);
+  --line: oklch(0.915 0.008 240);
 }
 
 .dark {

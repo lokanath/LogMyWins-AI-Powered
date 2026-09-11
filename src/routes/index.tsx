@@ -13,13 +13,13 @@ import { generateSummary } from "@/lib/summary.functions";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Wins Journal — Meridian" },
+      { title: "Wins Journal" },
       {
         name: "description",
         content:
           "Log and track your professional achievements and their business impact.",
       },
-      { property: "og:title", content: "Wins Journal — Meridian" },
+      { property: "og:title", content: "Wins Journal" },
       {
         property: "og:description",
         content:
