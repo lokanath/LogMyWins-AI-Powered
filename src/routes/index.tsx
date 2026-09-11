@@ -318,33 +318,97 @@ function Journal({ session }: { session: Session }) {
                   key={win.id}
                   className="group rounded-xl bg-white/55 p-5 ring-1 ring-white/50 backdrop-blur-xl sm:p-6"
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="w-14 shrink-0 text-center">
-                      <div className="text-[11px] font-semibold uppercase tracking-wider text-teal">
-                        {format(parseISO(win.win_date), "MMM")}
+                  {editingId === win.id ? (
+                    <form onSubmit={handleUpdate} className="space-y-4">
+                      <div>
+                        <label className="mb-1.5 block text-xs font-medium text-ink/50">
+                          Date
+                        </label>
+                        <input
+                          type="date"
+                          max={format(new Date(), "yyyy-MM-dd")}
+                          value={editDate}
+                          onChange={(e) => setEditDate(e.target.value)}
+                          className="w-full rounded-lg bg-white/70 px-3.5 py-2.5 text-sm text-ink ring-1 ring-line focus:outline-none focus:ring-2 focus:ring-teal/40"
+                        />
                       </div>
-                      <div className="font-serif text-2xl leading-none text-ink">
-                        {format(parseISO(win.win_date), "dd")}
+                      <div>
+                        <label className="mb-1.5 block text-xs font-medium text-ink/50">
+                          Description of the win
+                        </label>
+                        <textarea
+                          rows={3}
+                          value={editDescription}
+                          onChange={(e) => setEditDescription(e.target.value)}
+                          className="w-full resize-none rounded-lg bg-white/70 px-3.5 py-2.5 text-sm text-ink ring-1 ring-line focus:outline-none focus:ring-2 focus:ring-teal/40"
+                        />
+                      </div>
+                      <div>
+                        <label className="mb-1.5 block text-xs font-medium text-ink/50">
+                          Business impact
+                        </label>
+                        <textarea
+                          rows={2}
+                          value={editImpact}
+                          onChange={(e) => setEditImpact(e.target.value)}
+                          className="w-full resize-none rounded-lg bg-white/70 px-3.5 py-2.5 text-sm text-ink ring-1 ring-line focus:outline-none focus:ring-2 focus:ring-teal/40"
+                        />
+                      </div>
+                      <div className="flex gap-3">
+                        <button
+                          type="submit"
+                          disabled={updateMutation.isPending}
+                          className="rounded-lg bg-teal px-5 py-2.5 text-sm font-semibold text-white ring-1 ring-teal transition-transform hover:-translate-y-px active:translate-y-0 disabled:opacity-50"
+                        >
+                          {updateMutation.isPending ? "Saving..." : "Save"}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setEditingId(null)}
+                          className="rounded-lg px-5 py-2.5 text-sm font-medium text-ink/55 ring-1 ring-line transition-colors hover:text-ink"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </form>
+                  ) : (
+                    <div className="flex items-start gap-4">
+                      <div className="w-14 shrink-0 text-center">
+                        <div className="text-[11px] font-semibold uppercase tracking-wider text-teal">
+                          {format(parseISO(win.win_date), "MMM")}
+                        </div>
+                        <div className="font-serif text-2xl leading-none text-ink">
+                          {format(parseISO(win.win_date), "dd")}
+                        </div>
+                      </div>
+                      <div className="w-px self-stretch bg-line" />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-pretty text-[15px] text-ink">{win.description}</p>
+                        <div className="mt-3 flex items-start gap-2 text-sm text-ink/55">
+                          <span className="mt-px grid size-4 shrink-0 place-items-center text-teal/70">
+                            <span className="block size-1.5 rounded-full bg-current" />
+                          </span>
+                          <p className="text-pretty">{win.business_impact}</p>
+                        </div>
+                      </div>
+                      <div className="mt-px flex shrink-0 items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+                        <button
+                          onClick={() => startEdit(win)}
+                          className="text-xs text-ink/30 transition-colors hover:text-teal"
+                          aria-label="Edit entry"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => deleteMutation.mutate(win.id)}
+                          className="text-xs text-ink/30 transition-colors hover:text-destructive"
+                          aria-label="Delete entry"
+                        >
+                          ✕
+                        </button>
                       </div>
                     </div>
-                    <div className="w-px self-stretch bg-line" />
-                    <div className="min-w-0 flex-1">
-                      <p className="text-pretty text-[15px] text-ink">{win.description}</p>
-                      <div className="mt-3 flex items-start gap-2 text-sm text-ink/55">
-                        <span className="mt-px grid size-4 shrink-0 place-items-center text-teal/70">
-                          <span className="block size-1.5 rounded-full bg-current" />
-                        </span>
-                        <p className="text-pretty">{win.business_impact}</p>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => deleteMutation.mutate(win.id)}
-                      className="mt-px shrink-0 text-xs text-ink/30 opacity-0 transition-opacity hover:text-destructive group-hover:opacity-100"
-                      aria-label="Delete entry"
-                    >
-                      ✕
-                    </button>
-                  </div>
+                  )}
                 </li>
               ))}
             </ol>
