@@ -106,7 +106,7 @@ function AuthPage() {
               <span className="size-2.5 rounded-full bg-teal" />
             </span>
             <span className="text-sm font-medium uppercase tracking-[0.18em] text-ink/50">
-              Meridian
+              Wins Journal
             </span>
           </div>
           <h1 className="font-serif text-3xl font-medium text-ink">
