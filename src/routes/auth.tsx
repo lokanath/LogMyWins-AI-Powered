@@ -9,15 +9,15 @@ import { useAuth } from "@/lib/use-auth";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign In — Wins Journal" },
+      { title: "Sign In — LogMyWins" },
       {
         name: "description",
-        content: "Access your private professional wins journal.",
+        content: "Access your private AI-powered wins journal.",
       },
-      { property: "og:title", content: "Sign In — Wins Journal" },
+      { property: "og:title", content: "Sign In — LogMyWins" },
       {
         property: "og:description",
-        content: "Access your private professional wins journal.",
+        content: "Access your private AI-powered wins journal.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -106,7 +106,7 @@ function AuthPage() {
               <span className="size-2.5 rounded-full bg-teal" />
             </span>
             <span className="text-sm font-medium uppercase tracking-[0.18em] text-ink/50">
-              Wins Journal
+              LogMyWins
             </span>
           </div>
           <h1 className="font-serif text-3xl font-medium text-ink">

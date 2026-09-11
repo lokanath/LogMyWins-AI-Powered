@@ -13,17 +13,17 @@ import { generateSummary } from "@/lib/summary.functions";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Wins Journal" },
+      { title: "LogMyWins — AI Wins Journal" },
       {
         name: "description",
         content:
-          "Log and track your professional achievements and their business impact.",
+          "Log your professional wins and their business impact, then generate polished, executive-grade achievement summaries with AI.",
       },
-      { property: "og:title", content: "Wins Journal" },
+      { property: "og:title", content: "LogMyWins — AI Wins Journal" },
       {
         property: "og:description",
         content:
-          "Log and track your professional achievements and their business impact.",
+          "Log your professional wins and their business impact, then generate polished, executive-grade achievement summaries with AI.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -248,7 +248,7 @@ function Journal({ session }: { session: Session }) {
             </button>
           </div>
           <h1 className="text-balance font-serif text-4xl font-medium leading-none text-ink sm:text-5xl">
-            Wins Journal
+            LogMyWins
           </h1>
           <p className="mt-4 max-w-[42ch] text-pretty text-ink/55">
             A private record of what you moved, with the impact each win created. Nothing else.
