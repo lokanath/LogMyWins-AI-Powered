@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Session } from "@supabase/supabase-js";
-import { format, parseISO } from "date-fns";
+import { format, parseISO, isAfter } from "date-fns";
 import { toast } from "sonner";
 
 import { supabase } from "@/integrations/supabase/client";
@@ -126,6 +126,10 @@ function Journal({ session }: { session: Session }) {
       toast.error("Please fill in all fields");
       return;
     }
+    if (isAfter(parseISO(date), new Date())) {
+      toast.warning("Future date selections are not allowed.");
+      return;
+    }
     createMutation.mutate({
       win_date: date,
       description: description.trim(),
@@ -196,6 +200,7 @@ function Journal({ session }: { session: Session }) {
               <input
                 id="win-date"
                 type="date"
+                max={format(new Date(), "yyyy-MM-dd")}
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 className="w-full rounded-lg bg-white/70 px-3.5 py-2.5 text-sm text-ink ring-1 ring-line transition-transform focus:outline-none focus:ring-2 focus:ring-teal/40"
