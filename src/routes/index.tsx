@@ -191,6 +191,37 @@ function Journal({ session }: { session: Session }) {
     });
   };
 
+  const [timeframe, setTimeframe] = useState<"month" | "quarter" | "year">(
+    "month",
+  );
+  const [summary, setSummary] = useState<string[] | null>(null);
+  const callSummary = useServerFn(generateSummary);
+
+  const summaryMutation = useMutation({
+    mutationFn: async () => callSummary({ data: { timeframe } }),
+    onSuccess: (result) => {
+      if (!result.bullets.length) {
+        setSummary(null);
+        toast.warning("No entries found in that time frame.");
+        return;
+      }
+      setSummary(result.bullets);
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || "Could not generate the summary.");
+    },
+  });
+
+  const handleCopy = async () => {
+    if (!summary) return;
+    try {
+      await navigator.clipboard.writeText(summary.map((b) => `• ${b}`).join("\n"));
+      toast.success("Summary copied");
+    } catch {
+      toast.error("Could not copy. Please select and copy manually.");
+    }
+  };
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     navigate({ to: "/auth" });
