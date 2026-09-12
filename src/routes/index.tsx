@@ -500,7 +500,7 @@ function Journal({ session }: { session: Session }) {
                 {summaryMutation.isPending && (
                   <span className="size-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
                 )}
-                {summaryMutation.isPending ? "Generating..." : "Generate Summary"}
+                {summaryMutation.isPending ? "Generating..." : "AI Generate Summary"}
               </button>
             </div>
 
