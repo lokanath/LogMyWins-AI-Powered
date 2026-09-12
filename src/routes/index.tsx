@@ -497,10 +497,28 @@ function Journal({ session }: { session: Session }) {
                 disabled={summaryMutation.isPending}
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-teal px-4 py-2 text-sm font-semibold text-white ring-1 ring-teal transition-transform hover:-translate-y-px active:translate-y-0 disabled:opacity-50"
               >
+                {!summaryMutation.isPending && (
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="size-4"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 2l1.6 5.4a3 3 0 0 0 1.9 1.9L21 11l-5.5 1.7a3 3 0 0 0-1.9 1.9L12 20l-1.6-5.4a3 3 0 0 0-1.9-1.9L3 11l5.5-1.7a3 3 0 0 0 1.9-1.9L12 2z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M19 14l.7 2.3a1 1 0 0 0 .6.6L22.5 17.6 20.3 18.3a1 1 0 0 0-.6.6L19 21.2l-.7-2.3a1 1 0 0 0-.6-.6L15.5 17.6l2.2-.7a1 1 0 0 0 .6-.6L19 14z"
+                      fill="currentColor"
+                      opacity="0.7"
+                    />
+                  </svg>
+                )}
                 {summaryMutation.isPending && (
                   <span className="size-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
                 )}
-                {summaryMutation.isPending ? "Generating..." : "Generate Summary"}
+                {summaryMutation.isPending ? "Generating..." : "AI Generate Summary"}
               </button>
             </div>
 
